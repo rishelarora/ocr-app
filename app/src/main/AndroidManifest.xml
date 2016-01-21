@@ -16,7 +16,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".extract"></activity>
+        <activity android:name=".extract"
+            android:noHistory="true">
+
+        </activity>
         <activity android:name=".OcrActivity"></activity>
         <activity android:name=".tags"></activity>
 
