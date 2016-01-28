@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="set tags method OCR"
+        android:id="@+id/button5"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="88dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="extract all tags method ocr"
+        android:id="@+id/button6"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="89dp"
+        android:layout_below="@+id/button5"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="crop portion ocr"
+        android:id="@+id/button7"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="96dp"
+        android:layout_below="@+id/button6"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
