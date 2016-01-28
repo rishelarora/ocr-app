@@ -44,7 +44,7 @@ public class OcrActivity extends Activity {
     String [] tagArray;
     LinearLayout showtags;
      private List<TextView> TextViewList = new ArrayList<>();
-
+    boolean check;
     public static final String PACKAGE_NAME = "com.datumdroid.android.ocr.simple";
     public static final String DATA_PATH = Environment
             .getExternalStorageDirectory().toString() + "/SimpleAndroidOCR/";
@@ -56,7 +56,7 @@ public class OcrActivity extends Activity {
 
     private static final String TAG = "SimpleAndroidOCR.java";
 
-    protected Button _button,b1;
+    protected Button _button,b1,b2;
 
     // protected ImageView _image;
     protected EditText _field;
@@ -122,16 +122,29 @@ public class OcrActivity extends Activity {
         // _image = (ImageView) findViewById(R.id.image);
         _field = (EditText) findViewById(R.id.field);
         tagArray = getIntent().getExtras().getStringArray("tags");
-        _button = (Button) findViewById(R.id.button);
-        b1 = (Button) findViewById(R.id.button2);
-        showtags=(LinearLayout)findViewById(R.id.display);
-
-
-        for (int j = 0; j < tagArray.length; j++) {
-            showtags.addView(TextView(j));
-            TextViewList.get(j).setText(tagArray[j]);
+        if(getIntent().getExtras().getBoolean("check")) {
+            check = getIntent().getExtras().getBoolean("check");
         }
 
+        _button = (Button) findViewById(R.id.button);
+        b1 = (Button) findViewById(R.id.button2);
+        b2 = (Button) findViewById(R.id.button3);
+        showtags=(LinearLayout)findViewById(R.id.display);
+        if(check)
+        {
+        b1.setVisibility(View.GONE);
+        }
+        else
+        {
+            b2.setVisibility(View.GONE);
+        }
+
+        if(tagArray!=null) {
+            for (int j = 0; j < tagArray.length; j++) {
+                showtags.addView(TextView(j));
+                TextViewList.get(j).setText(tagArray[j]);
+            }
+        }
 
         _button.setOnClickListener(new ButtonClickHandler());
 
@@ -145,6 +158,16 @@ public class OcrActivity extends Activity {
                 Bundle tagbundle = new Bundle();
                 tagbundle.putStringArray("tags",tagArray);
                 Intent myintent = new Intent(OcrActivity.this, extract.class).putExtra("TEXT", _field.getText().toString());
+                myintent.putExtras(tagbundle);
+                startActivity(myintent);
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle tagbundle = new Bundle();
+                tagbundle.putStringArray("tags",tagArray);
+                Intent myintent = new Intent(OcrActivity.this, extract2.class).putExtra("TEXT", _field.getText().toString());
                 myintent.putExtras(tagbundle);
                 startActivity(myintent);
             }
@@ -399,9 +422,9 @@ public class OcrActivity extends Activity {
 
             Log.v(TAG, "OCRED TEXT: " + recognizedText);
 
-            if ( lang.equalsIgnoreCase("eng") ) {
-                recognizedText = recognizedText.replaceAll("[^a-zA-Z0-9]+", " ");
-            }
+//            if ( lang.equalsIgnoreCase("eng") ) {
+//                recognizedText = recognizedText.replaceAll("[^a-zA-Z0-9]+", " ");
+//            }
 
             recognizedText = recognizedText.trim();
 
@@ -414,6 +437,8 @@ public class OcrActivity extends Activity {
                 pd.dismiss();
             }
             if ( result.length() != 0 ) {
+                if(_field.getText()!=null)
+                {_field.setText(null);}
                 _field.setText(_field.getText().toString().length() == 0 ? result : _field.getText() + " " + result);
                 _field.setSelection(_field.getText().toString().length());
 

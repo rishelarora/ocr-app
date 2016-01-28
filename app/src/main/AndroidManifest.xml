@@ -9,19 +9,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity android:name=".MainActivity" >
+
+        </activity>
+
+        <activity android:name=".extract"
+            android:noHistory="true"> </activity>
+        <activity android:name=".extract2"
+            android:noHistory="true">
+
+        </activity>
+        <activity android:name=".OcrActivity"
+            >
+
+        </activity>
+        <activity android:name=".CropOCRActivity"
+            >
+
+        </activity>
+        <activity android:name=".tags"></activity>
+        <activity android:name=".senddata2"></activity>
+        <activity android:name=".ChooseMethodActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity android:name=".extract"
-            android:noHistory="true">
 
         </activity>
-        <activity android:name=".OcrActivity"></activity>
-        <activity android:name=".tags"></activity>
 
 </application>
     <uses-permission android:name="android.permission.CAMERA" />

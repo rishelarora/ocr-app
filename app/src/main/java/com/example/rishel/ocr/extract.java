@@ -32,7 +32,8 @@ public class extract extends Activity {
 
     protected Button b1;
     String text;
-
+    JSONObject jsonObj;
+    String forjson;
 
     private List<TextView> TextViewList = new ArrayList<>();
     private List<EditText> editTextList = new ArrayList<EditText>();
@@ -61,24 +62,14 @@ public class extract extends Activity {
 //                                        "\""+key[4]+"\":\""+editTextList.get(4).getText().toString()+ "\"" +
 //                                       "}" +
 //                                     "}";
-                for(int i=0;i<editTextList.size();i++) {
 
-                    if (i == (editTextList.size() - 1)) {
-                        mid = mid +"\""+TextViewList.get(i).getText().toString() + "\":\"" + editTextList.get(i).getText().toString() + "\"";
-                    } else {
-                       mid = mid +"\""+TextViewList.get(i).getText().toString() + "\":\"" + editTextList.get(i).getText().toString() + "\",";
-                    }
-                }
-
-
-                String forjson="{ \"Data\": {" +
-
-                        mid+
-                        "}" +
-                        "}";
 
                 try {
-                    JSONObject jsonObj = new JSONObject(forjson);
+                    if(jsonObj!=null)
+                    {
+                        jsonObj=null;
+                    }
+                    jsonObj = new JSONObject(forjson);
                     Toast.makeText(getApplicationContext(),jsonObj.toString(),Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -101,6 +92,21 @@ public class extract extends Activity {
 
 
             }
+        for(int i=0;i<editTextList.size();i++) {
+
+            if (i == (editTextList.size() - 1)) {
+                mid = mid +"\""+TextViewList.get(i).getText().toString() + "\":\"" + editTextList.get(i).getText().toString() + "\"";
+            } else {
+                mid = mid +"\""+TextViewList.get(i).getText().toString() + "\":\"" + editTextList.get(i).getText().toString() + "\",";
+            }
+        }
+
+
+        forjson="{ \"Data\": {" +
+
+                mid+
+                "}" +
+                "}";
                 }
 
     public void matchset(String tag1, String tag2, TextView t, int c){
